@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://programdogs.github.io</id>
     <title>聆听</title>
-    <updated>2020-04-07T07:07:45.873Z</updated>
+    <updated>2020-04-07T12:19:12.420Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://programdogs.github.io"/>
     <link rel="self" href="https://programdogs.github.io/atom.xml"/>
@@ -10,4 +10,11 @@
     <logo>https://programdogs.github.io/images/avatar.png</logo>
     <icon>https://programdogs.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 聆听</rights>
+    <entry>
+        <title type="html"><![CDATA[利用Gridea和github提供的GitHub Pages搭建静态个人博客]]></title>
+        <id>https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/</id>
+        <link href="https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/">
+        </link>
+        <updated>2020-04-07T11:26:13.000Z</updated>
+    </entry>
 </feed>
