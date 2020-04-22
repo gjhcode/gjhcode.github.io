@@ -8,7 +8,7 @@
 <meta name="description" content="个人博客">
 <meta name="theme-color" content="#222">
 <title>linux-脚本练习（二） | 聆听</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1587543223628">
+<link rel="shortcut icon" href="/favicon.ico?v=1587545034299">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
 
@@ -311,12 +311,12 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1分钟</span>
+      <span>2分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>146<span class="pc-show">字数</span></span>
+      <span>369<span class="pc-show">字数</span></span>
     </span>
     
       
@@ -332,10 +332,10 @@
   </div>
 </header>
               <div class="post-body next-md-body" id="post_body">
-                <p>1、if条件表达式<br>
-（1）、单分支<br>
-if [ 条件表达式 ]; then</p>
-<pre><code>            命令序列
+                <p>1、if条件表达式</p>
+<pre><code>（1）、单分支
+        if [ 条件表达式 ]; then
+            命令序列
         fi
 
 （2）、双分支
@@ -354,11 +354,27 @@ if [ 条件表达式 ]; then</p>
             命令序列3
         fi
 </code></pre>
-<p>2、文件测试<br>
--d filename       目录文件<br>
--f filename        普通文件<br>
--r filename        可读文件<br>
--x filename       可执行文件</p>
+<p>2、文件测试</p>
+<pre><code>-d filename       目录文件
+-f filename        普通文件
+-r filename        可读文件
+-x filename       可执行文件
+</code></pre>
+<p>3、数字比较</p>
+<pre><code>n1 -ec n2          判断数字n1与n2是否相等，若相等返回0 ，否则返回1
+n1 -ne n2          判断数字n1与n2是否不等，若不等返回0 ，否则返回1
+n1 -lt   n2          判断数字n1是否小于n2，若小于返回0 ，否则返回1
+n1 -gt n2           判断数字n1是否大于n2，若大于返回0 ，否则返回1
+n1 -le n2            判断数字n1是否小于等于n2，若是返回0 ，否则返回1
+n1 -ge n2           判断数字n1是否大于等于n2，若是返回0 ，否则返回1
+</code></pre>
+<p>4、字符串比较</p>
+<pre><code>string          若字符串string非空，则返回真
+-n string      若字符串string长度大于0 ，则返回真
+-z string      若字符串string长度为0，则返回真
+string ！= string  若两个字符串不相等，则返回真
+string = string      若两个字符串相等，则返回真
+</code></pre>
 <p>练习<br>
 编写脚本判断是否问root管理员<br>
 #！/bin/bash<br>
