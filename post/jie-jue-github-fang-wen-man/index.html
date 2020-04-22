@@ -7,7 +7,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="个人博客">
 <meta name="theme-color" content="#222">
-<title>linux-脚本练习（二） | 聆听</title>
+<title>解决github访问慢 | 聆听</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1587543223628">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -27,8 +27,8 @@
 
 
 
-    <meta name="description" content="linux-脚本练习（二）" />
-    <meta name="keywords" content="linux" />
+    <meta name="description" content="解决github访问慢" />
+    <meta name="keywords" content="github" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -152,7 +152,8 @@
       <div class="sidebar-body pisces" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -196,6 +197,186 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto" id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#github">Github</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1; 
+let active = 'active-show', activeClass = 'active-current';
+let tocWrapper = document.querySelector('#toc_wrapper');
+let tocContent = tocWrapper.children[0];
+let autoNumber = tocWrapper&&tocWrapper.classList.contains('auto-number');
+
+function addTocNumber(elem, deep) {
+  if (!elem) {
+    return;
+  }
+  let prop = elem.__proto__;
+
+  if (prop === HTMLUListElement.prototype) {
+    for (let i = 0; i < elem.children.length; i++) {
+      addTocNumber(elem.children[i], deep + (i + 1) + '.');
+    }
+  } else if (prop === HTMLLIElement.prototype) {
+    // 保存li元素
+    if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+      lList.push(elem);
+    }
+    for (let i = 0; i < elem.children.length; i++) {
+      let cur = elem.children[i];
+      if (cur.__proto__ === HTMLAnchorElement.prototype) {
+        if (autoNumber) {
+          cur.text =  deep + ' ' + cur.text;
+        }
+      } else if (cur.__proto__ === HTMLUListElement.prototype) {
+        addTocNumber(cur, deep);
+      }
+    }
+  }
+}
+
+function removeParentActiveClass() {
+  let parents = tocContent.querySelectorAll('.'+active)
+  parents.forEach(function(elem) {
+    elem.classList.remove(active);
+  });
+}
+
+function addActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.add(activeClass);
+  }
+}
+
+function removeActiveClass(index) {
+  if (index >= 0 && index < hList.length) {
+    lList[index].classList.remove(activeClass);
+  }
+}
+
+function addActiveLiElemment(elem, parent) {
+  if (!elem || elem === parent) {
+    return;
+  } else {
+    if (elem.__proto__ === HTMLLIElement.prototype) {
+      elem.classList.add(active);
+    }
+    addActiveLiElemment(elem.parentElement, parent);
+  }
+}
+
+function showToc() {
+  if (tocWrapper) {
+    postBody = document.querySelector('#post_body');
+    for (let i = 0; i < postBody.children.length; i++) {
+      if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+        hList.push(postBody.children[i]);
+      }
+    }
+    if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+    } else if (tocWrapper.classList.contains('no_compress')){
+      tocContent.classList.add('expanded');
+    } else {
+      if (hList.length > 10) {
+        active = 'active-hidden'
+        tocContent.classList.add('closed');
+      } else {
+        tocContent.classList.add('expanded');
+      }
+    }
+  }
+}
+
+(function() {
+  // 处理不是从#一级标题开始目录
+  if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+    let con = tocContent.children[0].children[0];
+    tocContent.innerHTML = con.innerHTML;
+  }
+  addTocNumber(tocContent, '');
+})();
+
+document.addEventListener('scroll', function(e) {
+  if (lList.length <= 0) {
+    return;
+  }
+  let scrollTop = document.scrollingElement.scrollTop + 10;
+  let dir;
+
+  if (lastTop - scrollTop > 0) {
+    dir = 'up';
+  } else {
+    dir = 'down';
+  }
+
+  lastTop = scrollTop;
+  if (scrollTop <= 0) {
+    if (lastIndex >= 0 && lastIndex < hList.length) {
+      lList[lastIndex].classList.remove(activeClass);
+    }
+    return;
+  }
+
+  let current = 0, hasFind = false;
+  for (let i = 0; i < hList.length; i++) {
+    if (hList[i].offsetTop > scrollTop) {
+      current = i;
+      hasFind = true;
+      break;
+    }
+  }
+  if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+    current = hList.length - 1;
+  } else {
+    current--;
+  }
+  if (dir === 'down') {
+    if (current > lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex) 
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  } else {
+    if (current < lastIndex) {
+      addActiveClass(current);
+      removeActiveClass(lastIndex);
+      lastIndex = current;
+      removeParentActiveClass();
+      lList[current] && addActiveLiElemment(lList[current].parentElement,tocContent);
+    }
+  }
+});
+
+window.addEventListener('load', function() {
+  showToc();
+  document.querySelector('#sidebar').style='display: block;';
+  tocWrapper.classList.add('toc-active');
+  setTimeout(function() {
+    if ("createEvent" in document) {
+      let evt = document.createEvent("HTMLEvents");
+      evt.initEvent("scroll", false, true);
+      document.dispatchEvent(evt);
+    }
+    else {
+      document.fireEvent("scroll");
+    }
+  }, 500)
+})
+
+</script>
+            </div>
           
         
       </div>
@@ -283,8 +464,8 @@
             <div class="section bg-color post post-page">
               <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/">
-      linux-脚本练习（二）
+    <a class="post-title-link" href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/">
+      解决github访问慢
     </a>
   </h1>
   <div class="post-meta">
@@ -292,7 +473,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-04-21</span>
+      <span>2020-04-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -301,8 +482,8 @@
         <span class="pc-show">分类于</span>
         
           
-            <a href="https://programdogs.github.io/tag/LZ10rLbyn/">
-              <span>linux</span>
+            <a href="https://programdogs.github.io/tag/vi04BWDDH/">
+              <span>github</span>
             </a>
           
         
@@ -316,14 +497,14 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>146<span class="pc-show">字数</span></span>
+      <span>176<span class="pc-show">字数</span></span>
     </span>
     
       
       
         
       
-      <span id="/post/linux-jiao-ben-lian-xi-er/" data-flag-title="linux-脚本练习（二）" class="meta-item pc-show leancloud_visitors">
+      <span id="/post/jie-jue-github-fang-wen-man/" data-flag-title="解决github访问慢" class="meta-item pc-show leancloud_visitors">
         <span class="post-meta-divider">|</span>
         <i class="fa fa-eye"></i>
         <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
@@ -332,39 +513,35 @@
   </div>
 </header>
               <div class="post-body next-md-body" id="post_body">
-                <p>1、if条件表达式<br>
-（1）、单分支<br>
-if [ 条件表达式 ]; then</p>
-<pre><code>            命令序列
-        fi
-
-（2）、双分支
-        if [ 条件表达式 ]
-        then
-            命令序列1
-        else
-            命令序列2
-        fi
-（3）、多分支
-        if [ 条件表达式1 ]；then
-            命令序列1
-        elif [ 条件表达式2 ]；then
-            命令序列2
-        else
-            命令序列3
-        fi
-</code></pre>
-<p>2、文件测试<br>
--d filename       目录文件<br>
--f filename        普通文件<br>
--r filename        可读文件<br>
--x filename       可执行文件</p>
-<p>练习<br>
-编写脚本判断是否问root管理员<br>
-#！/bin/bash<br>
-# eg4-12.sh<br>
-if [ &quot;$(id -u)&quot; -eq &quot;0&quot; ] ； then<br>
-tar -czf  /root</p>
+                <p>原理就是设置dns#</p>
+<!-- more -->
+<p>找到host文件<br>
+地址是</p>
+<p>C:\Windows\System32\drivers\etc</p>
+<p>添加如下配置</p>
+<h1 id="github">Github</h1>
+<p>151.101.44.249 github.global.ssl.fastly.net<br>
+192.30.253.113 github.com<br>
+103.245.222.133 assets-cdn.github.com<br>
+23.235.47.133 assets-cdn.github.com<br>
+203.208.39.104 assets-cdn.github.com<br>
+204.232.175.78 documentcloud.github.com<br>
+204.232.175.94 gist.github.com<br>
+107.21.116.220 help.github.com<br>
+207.97.227.252 nodeload.github.com<br>
+199.27.76.130 raw.github.com<br>
+107.22.3.110 status.github.com<br>
+204.232.175.78 training.github.com<br>
+207.97.227.243 www.github.com<br>
+185.31.16.184 github.global.ssl.fastly.net<br>
+185.31.18.133 avatars0.githubusercontent.com<br>
+185.31.19.133 avatars1.githubusercontent.com<br>
+192.30.253.120 codeload.github.com</p>
+<p>然后打开cmd</p>
+<p>输入下方代码刷新dns<br>
+ipconfig /flushdns</p>
+<!-- more -->
+<p>本文参考网上来源</p>
 
               </div>
               <div class="post-footer">
@@ -375,7 +552,7 @@ tar -czf  /root</p>
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/" title="linux-脚本练习（二）">linux-脚本练习（二）</a>
+      <a href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/" title="解决github访问慢">解决github访问慢</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -384,21 +561,17 @@ tar -czf  /root</p>
   </ul>
   <div class="tags">
     
-      <a href="https://programdogs.github.io/tag/LZ10rLbyn/"># linux</a>
+      <a href="https://programdogs.github.io/tag/vi04BWDDH/"># github</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="解决github访问慢" href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/">解决github访问慢</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="解决github访问慢" href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="利用Gridea和github提供的GitHub Pages搭建静态个人博客" href="https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/">利用Gridea和github提供的GitHub Pages搭建静态个人博客</a>
-        <a class="nav-mobile-next" title="利用Gridea和github提供的GitHub Pages搭建静态个人博客" href="https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/">下一篇</a>
+        <a class="nav-pc-next" title="linux-脚本练习（二）" href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/">linux-脚本练习（二）</a>
+        <a class="nav-mobile-next" title="linux-脚本练习（二）" href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
