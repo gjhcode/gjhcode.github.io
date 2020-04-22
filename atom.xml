@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://programdogs.github.io</id>
     <title>聆听</title>
-    <updated>2020-04-22T08:45:42.348Z</updated>
+    <updated>2020-04-22T08:48:13.081Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://programdogs.github.io"/>
     <link rel="self" href="https://programdogs.github.io/atom.xml"/>
@@ -17,8 +17,58 @@
         </link>
         <updated>2020-04-22T06:11:47.000Z</updated>
         <summary type="html"><![CDATA[<p>原理就是设置dns#</p>
+<p>找到host文件<br>
+地址是</p>
+<p>C:\Windows\System32\drivers\etc</p>
+<p>添加如下配置</p>
+<p>$# Github<br>
+151.101.44.249 github.global.ssl.fastly.net<br>
+192.30.253.113 github.com<br>
+103.245.222.133 assets-cdn.github.com<br>
+23.235.47.133 assets-cdn.github.com<br>
+203.208.39.104 assets-cdn.github.com<br>
+204.232.175.78 documentcloud.github.com<br>
+204.232.175.94 gist.github.com<br>
+107.21.116.220 help.github.com<br>
+207.97.227.252 nodeload.github.com<br>
+199.27.76.130 raw.github.com<br>
+107.22.3.110 status.github.com<br>
+204.232.175.78 training.github.com<br>
+207.97.227.243 www.github.com<br>
+185.31.16.184 github.global.ssl.fastly.net<br>
+185.31.18.133 avatars0.githubusercontent.com<br>
+185.31.19.133 avatars1.githubusercontent.com<br>
+192.30.253.120 codeload.github.com</p>
+<p>然后打开cmd</p>
+<p>输入下方代码刷新dns<br>
+ipconfig /flushdns</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>原理就是设置dns#</p>
+<p>找到host文件<br>
+地址是</p>
+<p>C:\Windows\System32\drivers\etc</p>
+<p>添加如下配置</p>
+<p>$# Github<br>
+151.101.44.249 github.global.ssl.fastly.net<br>
+192.30.253.113 github.com<br>
+103.245.222.133 assets-cdn.github.com<br>
+23.235.47.133 assets-cdn.github.com<br>
+203.208.39.104 assets-cdn.github.com<br>
+204.232.175.78 documentcloud.github.com<br>
+204.232.175.94 gist.github.com<br>
+107.21.116.220 help.github.com<br>
+207.97.227.252 nodeload.github.com<br>
+199.27.76.130 raw.github.com<br>
+107.22.3.110 status.github.com<br>
+204.232.175.78 training.github.com<br>
+207.97.227.243 www.github.com<br>
+185.31.16.184 github.global.ssl.fastly.net<br>
+185.31.18.133 avatars0.githubusercontent.com<br>
+185.31.19.133 avatars1.githubusercontent.com<br>
+192.30.253.120 codeload.github.com</p>
+<p>然后打开cmd</p>
+<p>输入下方代码刷新dns<br>
+ipconfig /flushdns</p>
 ]]></content>
     </entry>
     <entry>
