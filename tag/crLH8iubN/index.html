@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8"/>
+      <meta charset="UTF-8"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="个人博客">
 <meta name="theme-color" content="#222">
-<title>linux-脚本练习（二） | 聆听</title>
+<title>聆听</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1588837667013">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -27,8 +27,6 @@
 
 
 
-    <meta name="description" content="linux-脚本练习（二）" />
-    <meta name="keywords" content="linux" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -134,25 +132,10 @@
     </div>
     <div class="main-continer">
       
-      <div class="section-layout pisces ">
+      <div class="section-layout  pisces">
         <div class="section-layout-wrapper">
-          
-
-<div class="sidebar">
-  
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
-      
-        <div class="post-list-sidebar">
-          <div class="sidebar-title">
-            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
-            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
-          </div>
-        </div>
-      
-      <div class="sidebar-body pisces" id="sidebar_body">
-        
-          
-            
+          <div id="sidebarMeta" class="sidebar">
+    
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -196,234 +179,70 @@
 
 
 </div>
-          
-        
-      </div>
-    </div>
-  
 </div>
 <script>
-  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
-  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
-  const SLIDE_UP_IN = 'slide-up-in';
-
-  let sidebar = document.querySelector('#sidebar'),
-  tocSideBar = document.querySelector('#tocSideBar'),
-  metaSideBar = document.querySelector('#metaSideBar'),
-  postToc = document.querySelector('#post_toc'),
-  postSiteMeta = document.querySelector('#post_side_meta'),
-  sidebarTitle = document.querySelector('.sidebar-title'),
-  sidebarBody = document.querySelector('#sidebar_body');
-
-  tocSideBar && tocSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  metaSideBar && metaSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  function toggleSidebar(e) {
-    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
-    if (currentTitle == e.srcElement) {
-      return ;
-    }
-    let current, showElement, hideElement;
-    if (e.srcElement == metaSideBar) {
-      showElement = postSiteMeta;
-      hideElement = postToc;
-    } else if (e.srcElement == tocSideBar){
-      showElement = postToc;
-      hideElement = postSiteMeta;
-    }
-    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
-    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
-
-    window.Velocity(hideElement, 'stop');
-    window.Velocity(hideElement, 'transition.slideUpOut', {
-      display: 'none',
-      duration: 200,
-      complete: function () {
-        window.Velocity(showElement, 'transition.slideDownIn', {
-          duration: 200
-        });
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'pisces';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
       }
-    })
-    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
-    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+    });
   }
-
-  postToc && postToc.addEventListener('transitionend', function() {
-    this.classList.remove(SLIDE_UP_IN);
-  });
-
-  if (sidebarBody) {
-    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
-      let hasFix = false;
-      let scrollEl = document.querySelector('.main-continer');
-      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
-      window.addEventListener('scroll', function(e) {
-        if (document.scrollingElement.scrollTop >= limitTop) {
-          if (!hasFix) {
-            sidebar.classList.add('sidebar-fixed');
-            hasFix = true;
-          }
-        } else {
-          if (hasFix) {
-            sidebar.classList.remove('sidebar-fixed');
-            hasFix = false;
-          }
-        }
-      });
-    }
-  }
-  
-</script>
-          <div class="section-box box-shadow-wrapper">
-            <div class="section bg-color post post-page">
-              <header class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/">
-      linux-脚本练习（二）
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span>发布于</span>
-      <span>2020-04-21</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
+  </script>
+            <div class="section-box tag-line">
+              <div class="box-shadow-wrapper">
+                <div class="bg-color">
+                  <section class="section posts-expand">
+                    <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          java
+          <small>标签</small>
+        </h2>
+      </div>
+      
         
           
-            <a href="https://programdogs.github.io/tag/LZ10rLbyn/">
-              <span>linux</span>
+            <a href="https://programdogs.github.io/post/java-xue-xi-lu-xian/">
+              <div class="motion-warpper">
+                <div class="tag-post-node">
+                  <h1>
+                    05-07
+                    <small>JAVA学习路线</small>
+                  </h1>
+                </div>  
+              </div>
             </a>
           
         
-      </span>
-      <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>2分钟</span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>369<span class="pc-show">字数</span></span>
-    </span>
-    
-      
       
         
+          
+        
       
-      <span id="/post/linux-jiao-ben-lian-xi-er/" data-flag-title="linux-脚本练习（二）" class="meta-item pc-show leancloud_visitors">
-        <span class="post-meta-divider">|</span>
-        <i class="fa fa-eye"></i>
-        <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
-      </span>
-    
-  </div>
-</header>
-              <div class="post-body next-md-body" id="post_body">
-                <p>1、if条件表达式</p>
-<pre><code>（1）、单分支
-        if [ 条件表达式 ]; then
-            命令序列
-        fi
-
-（2）、双分支
-        if [ 条件表达式 ]
-        then
-            命令序列1
-        else
-            命令序列2
-        fi
-（3）、多分支
-        if [ 条件表达式1 ]；then
-            命令序列1
-        elif [ 条件表达式2 ]；then
-            命令序列2
-        else
-            命令序列3
-        fi
-</code></pre>
-<p>2、文件测试</p>
-<pre><code>-d filename       目录文件
--f filename        普通文件
--r filename        可读文件
--x filename       可执行文件
-</code></pre>
-<p>3、数字比较</p>
-<pre><code>n1 -ec n2          判断数字n1与n2是否相等，若相等返回0 ，否则返回1
-n1 -ne n2          判断数字n1与n2是否不等，若不等返回0 ，否则返回1
-n1 -lt   n2          判断数字n1是否小于n2，若小于返回0 ，否则返回1
-n1 -gt n2           判断数字n1是否大于n2，若大于返回0 ，否则返回1
-n1 -le n2            判断数字n1是否小于等于n2，若是返回0 ，否则返回1
-n1 -ge n2           判断数字n1是否大于等于n2，若是返回0 ，否则返回1
-</code></pre>
-<p>4、字符串比较</p>
-<pre><code>string          若字符串string非空，则返回真
--n string      若字符串string长度大于0 ，则返回真
--z string      若字符串string长度为0，则返回真
-string ！= string  若两个字符串不相等，则返回真
-string = string      若两个字符串相等，则返回真
-</code></pre>
-<p>练习<br>
-编写脚本判断是否问root管理员<br>
-#！/bin/bash<br>
-# eg4-12.sh<br>
-if [ &quot;$(id -u)&quot; -eq &quot;0&quot; ] ； then<br>
-tar -czf  /root</p>
-
-              </div>
-              <div class="post-footer">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-      <strong>本文作者：</strong>
-      聆听
-    </li>
-    <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://programdogs.github.io/post/linux-jiao-ben-lian-xi-er/" title="linux-脚本练习（二）">linux-脚本练习（二）</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong>
-      本博客所有文章除特别声明外，转载请注明出处！
-    </li>
-  </ul>
-  <div class="tags">
-    
-      <a href="https://programdogs.github.io/tag/LZ10rLbyn/"># linux</a>
-    
-  </div>
-  <div class="nav">
-    <div class="nav-prev">
+        
+          
+        
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="             解决github访问慢" href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/">             解决github访问慢</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="             解决github访问慢" href="https://programdogs.github.io/post/jie-jue-github-fang-wen-man/">上一篇</a>
+        
+          
+        
       
-    </div>
-    <div class="nav-next">
-      
-        <a class="nav-pc-next" title="利用Gridea和github提供的GitHub Pages搭建静态个人博客" href="https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/">利用Gridea和github提供的GitHub Pages搭建静态个人博客</a>
-        <a class="nav-mobile-next" title="利用Gridea和github提供的GitHub Pages搭建静态个人博客" href="https://programdogs.github.io/post/li-yong-gridea-he-github-ti-gong-de-github-pages-da-jian-jing-tai-ge-ren-bo-ke/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
+        
       
     </div>
   </div>
 </div>
-              
-  
-
-            </div>
+                  </section>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -623,36 +442,6 @@ var apiKey = landlord.dataset.key;
   // 代码高亮
   hljs.initHighlightingOnLoad();
 
-</script>
-      <div class="light-box" id="light_box"></div>
-<script>
-  let imgs = document.querySelectorAll('.post-body img');
-  let lightBox = document.querySelector('#light_box');
-  lightBox.addEventListener('mousedown', (e) => {
-    e.preventDefault()
-  })
-  lightBox.addEventListener('mousewheel', (e) => {
-    e.preventDefault()
-  })
-  let width = window.innerWidth * 0.8;
-  lightBox.onclick= () => {
-    let img = lightBox.querySelector('img');
-    lightBox.style = '';
-    img && img.remove();
-  }
-  imgs.forEach(item => {
-    item.onclick = function(e) {
-      let lightImg = document.createElement('img');
-      lightImg.src = this.src;
-      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
-      lightImg.style = `width: ${width}px; border: 1px solid #fff; border-radius: 2px;`;
-      lightImg.onclick = function() {
-        lightBox.style = '';
-        this.remove();
-      }
-      lightBox.append(lightImg);
-    }
-  })
 </script>
     </div>
   </body>
