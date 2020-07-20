@@ -7,7 +7,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="个人博客">
 <meta name="theme-color" content="#222">
-<title>             解决github访问慢 | 聆听</title>
+<title>java中的自增（++）和自减（--）的总结 | 聆听</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1595223287336">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -27,8 +27,8 @@
 
 
 
-    <meta name="description" content="             解决github访问慢" />
-    <meta name="keywords" content="github" />
+    <meta name="description" content="java中的自增（++）和自减（--）的总结" />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div class="head-top-line"></div>
@@ -283,8 +283,8 @@
             <div class="section bg-color post post-page">
               <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://gjhcode.github.io/post/jie-jue-github-fang-wen-man/">
-                   解决github访问慢
+    <a class="post-title-link" href="https://gjhcode.github.io/post/java-zhong-de-zi-zeng-he-zi-jian-de-zong-jie/">
+      java中的自增（++）和自减（--）的总结
     </a>
   </h1>
   <div class="post-meta">
@@ -292,38 +292,25 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-04-22</span>
+      <span>2020-06-13</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
-      <span class="meta-item">
-        <i class="fa fa-folder-o"></i>
-        <span class="pc-show">分类于</span>
-        
-          
-            <a href="https://gjhcode.github.io/tag/vi04BWDDH/">
-              <span>github</span>
-            </a>
-          
-        
-      </span>
-      <span class="post-meta-divider">|</span>
-    
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1分钟</span>
+      <span>5分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>152<span class="pc-show">字数</span></span>
+      <span>1079<span class="pc-show">字数</span></span>
     </span>
     
       
       
         
       
-      <span id="/post/jie-jue-github-fang-wen-man/" data-flag-title="             解决github访问慢" class="meta-item pc-show leancloud_visitors">
+      <span id="/post/java-zhong-de-zi-zeng-he-zi-jian-de-zong-jie/" data-flag-title="java中的自增（++）和自减（--）的总结" class="meta-item pc-show leancloud_visitors">
         <span class="post-meta-divider">|</span>
         <i class="fa fa-eye"></i>
         <span>浏览量：<span class="leancloud-visitors-count" ></span></span>
@@ -332,32 +319,100 @@
   </div>
 </header>
               <div class="post-body next-md-body" id="post_body">
-                <p>原理就是设置dns#<br>
-找到host文件<br>
-地址是</p>
-<pre><code>C:\Windows\System32\drivers\etc
+                <p>z-= - -y - x- -<br>
+今天在课堂上被一道题给“虐了”一小下，是关于java中运算符的题目，感觉很简单，但却失足。<br>
+所以要好好总结一下java中的自增和自减。</p>
+<p>先看一下课堂上的这一道题目：z=3、x=1、y=2。问z-= --y - x--？<br>
+1<br>
+这道题楼主一眼看去，直接写出了 z=2。（说出来不嫌丢人，为了警醒自己！）答案其实为3。</p>
+<p>我们先说一下前自增和后自增、前自减和后自减的区别。<br>
+自增（++）：将变量的值加1，分前缀式（如++i）和后缀式（如i++）。前缀式是先加1再使用；后缀式是先使用再加1。<br>
+自减（--）：将变量的值减1，分前缀式（如--i）和后缀式（如i--）。前缀式是先减1再使用；后缀式是先使用再减1。<br>
+我们分析一下上面那道题： 由题意可以变形为：z = z - ((--y) -(x--))<br>
+根据上面的分析：前缀式和后缀式的区别，这里的--y就是1，x--就是1，我们也就能得出z =3。<br>
+1<br>
+2<br>
+3<br>
+4<br>
+5<br>
+这里我们想要再输出一下 x 和 y 的值，相信很多人都会说 x=1;y=2;压根就没改变这两个数值，x和y不就是原本的数值么？</p>
+<p>可是事实结果是 x = 0； y = 1；这里的 x = 0 也就意味着 在一开始的题目中，我们是先使用的x，然后再进行的--操作。<br>
+1<br>
+j = j++<br>
+public class Test{</p>
+<pre><code>public static void main(String[] args){
+
+    int j=0;
+
+    for (int i = 0; i &lt; 100; i++){
+
+        j = j++;
+
+    }
+
+    System.out.println(j);
+
+}
 </code></pre>
-<p>添加如下配置</p>
-<pre><code># github related website
-192.30.253.113 github.com
-151.101.185.194 github.global.ssl.fastly.net
-203.98.7.65 gist.github.com
-13.229.189.0 codeload.github.com
-185.199.109.153 desktop.github.com 
-185.199.108.153 guides.github.com  
-185.199.108.153 blog.github.com
-18.204.240.114 status.github.com
-185.199.108.153 developer.github.com
-185.199.108.153 services.github.com
-192.30.253.175 enterprise.github.com   
-34.195.49.195 education.github.com    
-185.199.108.153 pages.github.com  
-34.196.237.103 classroom.github.com
+<p>}</p>
+<p>这道题，楼主第一眼过去，又是一眼看出了 j = 100 。可是答案却大出意料：j = 0;</p>
+<p>我们分析一下上面的代码，如果这是一段c语言的代码，那这个 j 最终的数值就是100了，但是在java里，java编译器每次遇到自增自减的语句时，就会开辟一块新的内存空间来保存，然后再将这个换成变量的值赋给左边的变量，就像下面的代码：<br>
+temp = j;</p>
+<pre><code>j = j + 1;
+
+j = temp;
 </code></pre>
-<p>然后打开cmd</p>
-<p>输入下方代码刷新dns<br>
-ipconfig /flushdns</p>
-<p>本文参考网上来源</p>
+<p>所以最后的答案就是0；</p>
+<p>我们再来看一下，如果换成 j = ++j;最后的j会是多少？流程应该如下：</p>
+<pre><code>temp = j +1;
+
+j = j + 1;
+
+j = temp;
+</code></pre>
+<p>这时候最后的结果应该就是100了。</p>
+<p>所以再对自增、自减运算符的变量进行赋值时都需要特别注意。借用别人的一句话：“如果在程序中只输入i++就不会出现这个方面的问题，所以大家在以后的程序中如果使用到i=i++的时候要格外小心，一般只需要用i++就不会有问题了。”<br>
+1<br>
+解题技巧<br>
+对于以下，有int x = 5, y = 6, z;<br>
+题目1：z = ++x + y++;<br>
+题目2：z = ++x + x++;<br>
+题目3：x = ++x + x++；</p>
+<p>对于上面的三道题目，我们下面一一解答。使用的技巧就是：把原始计算式转化成多个、有先后计算顺序的、小的计算式，然后带入变量的值，进行求解。记住：同一优先级的运算符的计算顺序是从右往左。<br>
+Q1：z = ++x + y++;  可以转化为:<br>
+x = x +１;<br>
+z = x + y;<br>
+y = y + 1;<br>
+带入x = 5, y = 6，可得x = 6; z = 12; y = 7;</p>
+<p>Q2：z = ++x + x++;  可以转化为:<br>
+x = x +１;<br>
+z = x + x;<br>
+x = x + 1;<br>
+带入x = 5，可得x = 6; z = 6+6=12; x = 7;   故x=7,z=12；</p>
+<p>Q3：x = ++x + x++;  可以转化为:<br>
+x = x +１;<br>
+x = x + x;<br>
+x = x + 1;<br>
+带入x = 5，可得x = 5+1=6; x = 6+6=12; x = 12+1=13;   故x=13。</p>
+<p>???? j = i++ + i++<br>
+public static void main(String [] args){<br>
+int i = 0;<br>
+int j = i++ + i++;      //这条语句等价于j = (i++) + (i++)<br>
+System.out.println(&quot;输出i的结果为&quot;+i);<br>
+System.out.println(&quot;输出j的结果为&quot;+j);<br>
+}<br>
+}</p>
+<pre><code>分析第一个（i++），假定 n=i++; 
+temp = n;
+i = i+1;
+n = temp;所以第一个（i++）==0；
+第二个：因为是前缀式：(此时的i = 1)
+所以最后的j = 1；
+i自增了两次，所以 i = 2；
+</code></pre>
+<p>————————————————<br>
+版权声明：本文为CSDN博主「yearing1017」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/jin970505/article/details/78534897</p>
 
               </div>
               <div class="post-footer">
@@ -368,7 +423,7 @@ ipconfig /flushdns</p>
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://gjhcode.github.io/post/jie-jue-github-fang-wen-man/" title="             解决github访问慢">             解决github访问慢</a>
+      <a href="https://gjhcode.github.io/post/java-zhong-de-zi-zeng-he-zi-jian-de-zong-jie/" title="java中的自增（++）和自减（--）的总结">java中的自增（++）和自减（--）的总结</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -377,21 +432,15 @@ ipconfig /flushdns</p>
   </ul>
   <div class="tags">
     
-      <a href="https://gjhcode.github.io/tag/vi04BWDDH/"># github</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="JAVA学习路线" href="https://gjhcode.github.io/post/java-xue-xi-lu-xian/">JAVA学习路线</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="JAVA学习路线" href="https://gjhcode.github.io/post/java-xue-xi-lu-xian/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="linux-脚本练习（二）" href="https://gjhcode.github.io/post/linux-jiao-ben-lian-xi-er/">linux-脚本练习（二）</a>
-        <a class="nav-mobile-next" title="linux-脚本练习（二）" href="https://gjhcode.github.io/post/linux-jiao-ben-lian-xi-er/">下一篇</a>
+        <a class="nav-pc-next" title="JAVA学习路线" href="https://gjhcode.github.io/post/java-xue-xi-lu-xian/">JAVA学习路线</a>
+        <a class="nav-mobile-next" title="JAVA学习路线" href="https://gjhcode.github.io/post/java-xue-xi-lu-xian/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
